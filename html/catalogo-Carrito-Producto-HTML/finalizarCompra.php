@@ -60,48 +60,10 @@ $_SESSION['carrito'] = [];
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Compra Finalizada</title>
-    <link rel="stylesheet" href="/web2025/trabajoFinalPHP/css/Catalogo-Carrito-Css/carrito.css">
-    <style>
-        .mensaje-confirmacion {
-            max-width: 800px;
-            margin: 80px auto;
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #ccc;
-            text-align: center;
-        }
-        .mensaje-confirmacion h2 {
-            color: green;
-            margin-bottom: 20px;
-        }
-        .mensaje-confirmacion table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-        }
-        .mensaje-confirmacion th, .mensaje-confirmacion td {
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-        .mensaje-confirmacion th {
-            background-color: #457b9d;
-            color: white;
-        }
-        .mensaje-confirmacion a {
-            display: inline-block;
-            margin-top: 25px;
-            background-color: #2a9d8f;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 6px;
-        }
-        .mensaje-confirmacion a:hover {
-            background-color: #21867a;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra</title>
+    <link rel="stylesheet" href="../../css/Catalogo-Carrito-Css/finalizarCompra.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="mensaje-confirmacion">
@@ -124,7 +86,7 @@ $_SESSION['carrito'] = [];
             <?php endforeach; ?>
         </table>
 
-        <a href="agregar_al_carrito.php">Volver al catálogo</a>
+        <a href="catalogo.php">Volver al catálogo</a>
     </div>
 </body>
 </html>
