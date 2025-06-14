@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['usuario_id']) || ($_SESSION['rol'] !== 'empleado' && $_SESSION['rol'] !== 'admin')) {
+    header("Location: index.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,36 +23,36 @@
         </div>
         <nav class="nav-bar">
             <ul>
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="/html/catalogo-Carrito-Producto-HTML/catalogo.html">Catálogo</a></li>
-                <li><a href="./contactoHtml/contacto.html">Contacto</a></li>                                
-                <li><a href="../loginHtml/login.html" class="btn-login"><i class="fas fa-user"></i> Iniciar Sesión</a></li>
+                <li><a href="index.php">Inicio</a></li>
+                <li><a href="./catalogo-Carrito-Producto-HTML/catalogo.php">Catálogo</a></li>
+                <li><a href="./contactoHtml/contacto.php">Contacto</a></li>                                
+                <li><a href="./loginHtml/login.php" class="btn-login"><i class="fas fa-user"></i> Iniciar Sesión</a></li>
             </ul>
         </nav>
     </header>
 
 
     <nav class="ruta">
-        <a href="index.html">Inicio</a> > <a href="#">Panel de Personal</a>
+        <a href="index.php">Inicio</a> > <a href="#">Panel de Personal</a>
     </nav>
     <main>
-        <h2>Panel de Pesonal de la Empresa</h2>
+        <h2>Panel de Personal de la Empresa</h2>
         <section class="opciones">
             <div class="opcion">
                 <h2>Ingresar como Empleado</h2>
-                <p>Operaciones como  Empleado</p>
-                <a href="Empleadohtml/empleado.html" class="boton">Empleado</a>
+                <p>Operaciones como Empleado</p>
+                <a href="../html/Empleadohtml/empleado.php" class="boton">Empleado</a>
             </div>
             <div class="opcion">
                 <h2>Ingresar como Administrador</h2>
                 <p>Operaciones como Administrador.</p>
-                <a href="administradorhtml/admin.html" class="boton">Administrador</a>
+                <a href="../html/administradorhtml/admin.php" class="boton">Administrador</a>
             </div>
-            <div class="opcion">
+            <!-- <div class="opcion">
                 <h2>Ingresar como Gerente</h2>
                 <p>Operaciones como Gerente</p>
-                <a href="gerenteHtml/principal.html" class="boton">Gerente</a>
-            </div>
+                <a href="../html/gerenteHtml/principal.php" class="boton">Gerente</a>
+            </div> -->
         
         </section>
 
