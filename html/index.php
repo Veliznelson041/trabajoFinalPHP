@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -22,9 +25,18 @@
             <ul>
                 <li><a href="#">Inicio</a></li>
                 <li><a href="catalogo-Carrito-Producto-HTML/catalogo.php">Catálogo</a></li>
-                <li><a href="./contactoHtml/contacto.php">Contacto</a></li>                                
-                <li><a href="loginHtml/login.php" class="btn-login"><i class="fas fa-user"></i> Iniciar Sesión</a></li>
-                <li><a href="personal.php">Personal</a></li>
+                <li><a href="./contactoHtml/contacto.php">Contacto</a></li> 
+                
+                <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']): ?>
+                    <li><a href="#" class="btn-login"><i class="fas fa-user"></i> Bienvenido, <?php echo htmlspecialchars($_SESSION['nombre']); ?></a></li>
+                    <li><a href="loginHtml/logout.php" class="btn-login"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+                <?php else: ?>
+
+                    <li><a href="loginHtml/login.php" class="btn-login"><i class="fas fa-user"></i> Iniciar Sesión</a></li>
+                <?php endif; ?>
+                <?php if (isset($_SESSION['rol']) && ($_SESSION['rol'] == 'empleado' || $_SESSION['rol'] == 'admin')): ?>
+                    <li><a href="personal.php">Personal</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
     </header>
