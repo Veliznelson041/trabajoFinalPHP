@@ -17,11 +17,11 @@ if (isset($_GET['vaciar'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="es-AR">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Carrito de Compras - Suplementos Dynamite</title>
-    <link rel="stylesheet" href="../../css/Catalogo-Carrito-Css/carrito.css">
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="/web2025/trabajoFinalPHP/css/Catalogo-Carrito-Css/carrito.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
