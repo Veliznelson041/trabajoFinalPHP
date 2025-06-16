@@ -1,65 +1,130 @@
+<?php
+session_start();
+$_SESSION['usuario_id'] = 1;
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['usuario_id'])) {
+    die("Error: el usuario no está autenticado.");
+}
+
+$usuario_id = $_SESSION['usuario_id'];
+
+// Verificar que haya productos en el carrito
+if (!isset($_SESSION['carrito']) || empty($_SESSION['carrito'])) {
+    header("Location: carrito.php");
+    exit;
+}
+
+// Conexión a la base de datos
+$conexion = new mysqli("localhost", "root", "", "suplementos_dynamite");
+if ($conexion->connect_error) {
+    die("Error de conexión: " . $conexion->connect_error);
+}
+
+// Medio de pago fijo de prueba (deberías permitir elegir más adelante)
+if (!isset($_POST['medio_pago_id'])) {
+    die("Error: medio de pago no seleccionado.");
+}
+$medio_pago_id = (int) $_POST['medio_pago_id'];
+$total = 0;
+
+// Calcular total
+foreach ($_SESSION['carrito'] as $item) {
+    $total += $item['precio'] * $item['cantidad'];
+}
+
+// Insertar en tabla pedidos
+$stmt = $conexion->prepare("INSERT INTO pedidos (usuario_id, medio_pago_id, total) VALUES (?, ?, ?)");
+$stmt->bind_param("iid", $usuario_id, $medio_pago_id, $total);
+$stmt->execute();
+$pedido_id = $stmt->insert_id;
+$stmt->close();
+
+// Insertar en tabla detalle_pedido
+$stmt = $conexion->prepare("INSERT INTO detalle_pedido (pedido_id, producto_id, cantidad, precio_unitario) VALUES (?, ?, ?, ?)");
+foreach ($_SESSION['carrito'] as $item) {
+    $producto_id = $item['producto_id'];
+    $cantidad = $item['cantidad'];
+    $precio_unitario = $item['precio'];
+    $stmt->bind_param("iiid", $pedido_id, $producto_id, $cantidad, $precio_unitario);
+    $stmt->execute();
+}
+$stmt->close();
+
+// Guardar resumen antes de vaciar el carrito
+$resumen = $_SESSION['carrito'];
+$_SESSION['carrito'] = [];
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finalizar Compra</title>
-    <link rel="stylesheet" href="../../css/Catalogo-Carrito-Css/finalizarCompra.css"> <!-- Asegúrate de enlazar tu archivo CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Compra Finalizada</title>
+    <link rel="stylesheet" href="/web2025/trabajoFinalPHP/css/Catalogo-Carrito-Css/carrito.css">
+    <style>
+        .mensaje-confirmacion {
+            max-width: 800px;
+            margin: 80px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+            text-align: center;
+        }
+        .mensaje-confirmacion h2 {
+            color: green;
+            margin-bottom: 20px;
+        }
+        .mensaje-confirmacion table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        .mensaje-confirmacion th, .mensaje-confirmacion td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .mensaje-confirmacion th {
+            background-color: #457b9d;
+            color: white;
+        }
+        .mensaje-confirmacion a {
+            display: inline-block;
+            margin-top: 25px;
+            background-color: #2a9d8f;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+        .mensaje-confirmacion a:hover {
+            background-color: #21867a;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt_eZYMvS26mdHNwVQw-zHWqDRdSz5XzAVHQ&s" alt="Logo de Suplementos Dynamite" class="logo">
-            <h1>Suplementos Dynamite</h1>
-        </div>
-        <br>
-        <p id="date-time"></p>
-        <nav class="nav-bar">
-            <ul>
-                <li><a href="/html/index.html">Inicio</a></li>
-                <li><a href="catalogo.html">Catálogo</a></li>
-                <li><a href="/html/contactoHtml/contacto.html">Contacto</a></li>                                
-                <li><a href="/html/loginHtml/login.html" class="btn-login"><i class="fas fa-user"></i> Iniciar Sesión</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="mensaje-confirmacion">
+        <h2>✅ ¡Gracias por tu compra!</h2>
+        <p>Tu pedido fue registrado exitosamente.</p>
 
-    <main>
-        <br>
-        <section class="confirmation-message">
-            <h2>¡COMPRA EXITOSA!</h2>
-            <br>
-            <p>¡¡Gracias por tu compra, Juan!! Tu pedido está en camino y recibirás un correo de confirmación a la brevedad.</p>
-        </section>
+        <h3>🧾 Resumen de productos:</h3>
+        <table>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+            </tr>
+            <?php foreach ($resumen as $item): ?>
+            <tr>
+                <td><?= htmlspecialchars($item['nombre']) ?></td>
+                <td><?= $item['cantidad'] ?></td>
+                <td>$<?= number_format($item['precio'] * $item['cantidad'], 2) ?></td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
 
-        <section class="order-summary">
-            <h2>Resumen de la Orden</h2>
-            <p><strong>Producto:</strong> Creatina StarNutrition</p>
-            <p><strong>Cantidad:</strong> 2</p>
-            <p><strong>Precio:</strong> $60.000</p>
-            <p><strong>Descuento:</strong> $5.000</p>
-            <p><strong>Total Pagado:</strong>$55.000</p>
-        </section>
-
-        <section class="shipping-info">
-            <h2>Información de Envío</h2>
-            <p><strong>Nombre Completo:</strong> Juan Pérez</p>
-            <p><strong>Dirección de Envío:</strong> Av. Libertador 1000, Buenos Aires</p>
-            <p><strong>Correo Electrónico:</strong> juan.perez@example.com</p>
-            <p><strong>Teléfono:</strong> 1234-5678</p>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>Dirección: Av. Pres. Arturo Illia 902, Catamarca, Argentina | Email: contacto@suplementosdynamite.com | Tel: (123) 456-7890</p>
-        <div class="social-icons">
-            <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.instagram.com/suplementosdynamite" target="_blank"><i class="fab fa-instagram"></i></a>
-        </div>
-        <p>&copy; 2024 Suplementos Dynamite. Todos los derechos reservados.</p>
-    </footer>
-
+        <a href="agregar_al_carrito.php">Volver al catálogo</a>
+    </div>
 </body>
 </html>
