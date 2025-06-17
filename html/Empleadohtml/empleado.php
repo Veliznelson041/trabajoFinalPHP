@@ -21,7 +21,7 @@
         <nav class="nav-bar">
             <ul>
                 <li><a href="#">Inicio</a></li>                              
-                <li><a href="/html/Empleadohtml/perfilempleado.html" class="btn-login"><i class="fas fa-user"></i> Empleado #12</a></li>
+                <li><a href="/html/Empleadohtml/perfilempleado.php" class="btn-login"><i class="fas fa-user"></i> Empleado #12</a></li>
 
             </ul>
         </nav>
@@ -30,11 +30,11 @@
     <div>
         <nav class="nav-empleado">
             <ul>
-                <li><a href="buzon-consultas.html">Buzón de Consultas</a></li>
-                <li><a href="listado-productos.html">Productos</a></li>
-                <li><a href="proveedores.html">Proveedores</a></li>
-                <li><a href="seguimiento.html">Seguimiento de Paquetes</a></li>
-                <li><a href="../index.html"> Vista Previa de Cliente</a></li>
+                <li><a href="buzon-consultas.php">Buzón de Consultas</a></li>
+                <li><a href="listado-productos.php">Productos</a></li>
+                <li><a href="proveedores.php">Proveedores</a></li>
+                <li><a href="seguimiento.php">Seguimiento de Paquetes</a></li>
+                <li><a href="../index.php"> Vista Previa de Cliente</a></li>
             </ul>
         </nav>
     </div>

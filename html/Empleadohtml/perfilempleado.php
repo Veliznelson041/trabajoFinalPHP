@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
-    <link rel="stylesheet" href="/css/Empleadocss/styles-perfil.css">
+    <link rel="stylesheet" href="../../css/Empleadocss/styles-perfil.css">
 </head>
 <body>
     <!-- Encabezado -->
@@ -25,11 +25,11 @@
     <div>
         <nav class="nav-empleado">
             <ul>
-                <li><a href="buzon-consultas.html">Buzón de Consultas</a></li>
-                <li><a href="listado-productos.html">Productos</a></li>
-                <li><a href="proveedores.html">Proveedores</a></li>
-                <li><a href="seguimiento.html">Seguimiento de Paquetes</a></li>
-                <li><a href="../index.html">Vista Previa de Cliente</a></li>
+                <li><a href="buzon-consultas.php">Buzón de Consultas</a></li>
+                <li><a href="listado-productos.php">Productos</a></li>
+                <li><a href="proveedores.php">Proveedores</a></li>
+                <li><a href="seguimiento.php">Seguimiento de Paquetes</a></li>
+                <li><a href="../index.php">Vista Previa de Cliente</a></li>
             </ul>
         </nav>
     </div>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado</title>
-    <link rel="stylesheet" href="/css/Empleadocss/styles-productos.css">
+    <link rel="stylesheet" href="../../css/Empleadocss/styles-productos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -19,7 +19,7 @@
             <p id="date-time"></p>
         <nav class="nav-bar">
             <ul>
-                <li><a href="empleado.html">Inicio</a></li>                             
+                <li><a href="empleado.php">Inicio</a></li>                             
                 <li><a href="#" class="btn-login"><i class="fas fa-user"></i> Empleado #12</a></li>
 
             </ul>
@@ -28,7 +28,7 @@
     <br>
 
     <nav class="ruta">
-        <a href="listado-productos.html">Listado</a> > <a href="#">Creatina</a>
+        <a href="listado-productos.php">Listado</a> > <a href="#">Creatina</a>
     </nav>
 
     <main>
