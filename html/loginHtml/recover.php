@@ -6,7 +6,7 @@
     <title>Recuperar clave</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <link rel="stylesheet" href="/css/loginCss/recover.css">
+    <link rel="stylesheet" href="../../css/loginCss/recover.css">
 </head>
 <body>
 
@@ -21,17 +21,17 @@
             <p id="date-time"></p>
         <nav class="nav-bar">
             <ul>
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="/html/catalogo-Carrito-Producto-HTML/catalogo.html">Catálogo</a></li>
-                <li><a href="../contactoHtml/contacto.html">Contacto</a></li>                                
-                <li><a href="/html/loginHtml/login.html" class="btn-login"><i class="fas fa-user"></i> Iniciar Sesión</a></li>
+                <li><a href="../index.php">Inicio</a></li>
+                <li><a href="/html/catalogo-Carrito-Producto-HTML/catalogo.php">Catálogo</a></li>
+                <li><a href="../contactoHtml/contacto.php">Contacto</a></li>                                
+                <li><a href="/html/loginHtml/login.php" class="btn-login"><i class="fas fa-user"></i> Iniciar Sesión</a></li>
 
             </ul>
         </nav>
     </header>
 
     <nav class="ruta">
-        <a href="../index.html">Inicio</a> &gt; <a href="login.html">Iniciar Sesión</a> &gt; <a href="../loginHtml/recover.html">Recuperar contraseña</a> 
+        <a href="../index.php">Inicio</a> &gt; <a href="login.php">Iniciar Sesión</a> &gt; <a href="../loginHtml/recover.php">Recuperar contraseña</a> 
     </nav>
 
     <div class="container">
