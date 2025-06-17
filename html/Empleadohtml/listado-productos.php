@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listado</title>
-    <link rel="stylesheet" href="/css/Empleadocss/styles-productos.css">
+    <link rel="stylesheet" href="../../css/Empleadocss/styles-productos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -19,7 +19,7 @@
             <p id="date-time"></p>
         <nav class="nav-bar">
             <ul>
-                <li><a href="empleado.html">Inicio</a></li>                              
+                <li><a href="empleado.php">Inicio</a></li>                              
                 <li><a href="#" class="btn-login"><i class="fas fa-user"></i> Empleado #12</a></li>
 
             </ul>
@@ -29,9 +29,9 @@
     <div>
         <nav class="nav-empleado">
             <ul>
-                <li><a href="buzon-consultas.html">Buzón de Consultas</a></li>
-                <li><a href="proveedores.html">Proveedores</a></li>
-                <li><a href="seguimiento.html">Seguimiento de Paquetes</a></li>
+                <li><a href="buzon-consultas.php">Buzón de Consultas</a></li>
+                <li><a href="proveedores.php">Proveedores</a></li>
+                <li><a href="seguimiento.php">Seguimiento de Paquetes</a></li>
             </ul>
         </nav>
     </div>
@@ -40,7 +40,7 @@
         
     <!-- Botón para agregar un nuevo producto -->
     <div class="actions">
-        <li><a class="btn-agregar" href="agregar-producto.html">Agregar Nuevo Producto</a></li>
+        <li><a class="btn-agregar" href="agregar-producto.php">Agregar Nuevo Producto</a></li>
     </div>
 
         <!-- Tabla de productos -->
@@ -62,7 +62,7 @@
                     <td>$ 30,000.00</td>
                     <td>20 unidades</td>
                     <td>
-                        <a href="ver-producto.html" class="btn-ver">Ver</a>
+                        <a href="ver-producto.php" class="btn-ver">Ver</a>
                     </td>
                 </tr>
                 <!-- Producto 2 -->
