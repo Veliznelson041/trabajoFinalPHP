@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suplementos Dynamite - Empleado</title>
-    <link rel="stylesheet" href="/css/Empleadocss/styles.css">
+    <link rel="stylesheet" href="../../css/Empleadocss/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -20,7 +20,7 @@
             <p id="date-time"></p>
         <nav class="nav-bar">
             <ul>
-                <li><a href="empleado.html">Inicio</a></li>                           
+                <li><a href="empleado.php">Inicio</a></li>                           
                 <li><a href="#" class="btn-login"><i class="fas fa-user"></i> Empleado #12</a></li>
 
             </ul>
@@ -30,9 +30,9 @@
     <div>
         <nav class="nav-empleado">
             <ul>
-                <li><a href="buzon-consultas.html">Buzón de Consultas</a></li>
-                <li><a href="listado-productos.html">Listado de Productos</a></li>
-                <li><a href="proveedores.html">Proveedores</a></li>
+                <li><a href="buzon-consultas.php">Buzón de Consultas</a></li>
+                <li><a href="listado-productos.php">Listado de Productos</a></li>
+                <li><a href="proveedores.php">Proveedores</a></li>
             </ul>
         </nav>
     </div>
