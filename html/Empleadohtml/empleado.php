@@ -1,159 +1,85 @@
+<?php
+require_once '../../controlSesion.php';
+require_once '../../conexion.php';
+
+// Obtener estadísticas rápidas
+$sql_productos = "SELECT COUNT(*) AS total FROM productos";
+$productos = $conexion->query($sql_productos)->fetch_assoc();
+
+$sql_pedidos = "SELECT COUNT(*) AS total FROM pedidos WHERE estado = 'pendiente'";
+$pedidos_pendientes = $conexion->query($sql_pedidos)->fetch_assoc();
+
+$sql_consultas = "SELECT COUNT(*) AS total FROM consultas WHERE estado = 'no respondida'";
+$consultas_nuevas = $conexion->query($sql_consultas)->fetch_assoc();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suplementos Dynamite - Empleado</title>
+    <title>Panel de Empleado</title>
     <link rel="stylesheet" href="../../css/Empleadocss/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-
-    <!-- Encabezado -->
     <header>
         <div class="header-container">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt_eZYMvS26mdHNwVQw-zHWqDRdSz5XzAVHQ&s" alt="Logo de Suplementos Dynamite" class="logo">
             <h1>Suplementos Dynamite</h1>
-            
         </div>
         <br>
-            <p id="date-time"></p>
+        <p id="date-time"></p>
         <nav class="nav-bar">
             <ul>
-                <li><a href="#">Inicio</a></li>                              
-                <li><a href="/html/Empleadohtml/perfilempleado.php" class="btn-login"><i class="fas fa-user"></i> Empleado #12</a></li>
-
+                <li><a href="empleado.php">Inicio</a></li>
+                <li><a href="#">Sobre Nosotros</a></li>
+                <li><a href="#">Contacto</a></li>                                
+                <li><a href="perfilempleado.php" class="btn-login"><i class="fas fa-user"></i> <?= htmlspecialchars($_SESSION['nombre']) ?></a></li>
             </ul>
         </nav>
     </header>
 
-    <div>
-        <nav class="nav-empleado">
-            <ul>
-                <li><a href="buzon-consultas.php">Buzón de Consultas</a></li>
-                <li><a href="listado-productos.php">Productos</a></li>
-                <li><a href="proveedores.php">Proveedores</a></li>
-                <li><a href="seguimiento.php">Seguimiento de Paquetes</a></li>
-                <li><a href="../index.php"> Vista Previa de Cliente</a></li>
-            </ul>
-        </nav>
+    <div class="welcome-message">
+        <h2>Bienvenido, <?= htmlspecialchars($_SESSION['nombre']) ?> <?= htmlspecialchars($_SESSION['apellido']) ?></h2>
+        <p>Rol: <?= ucfirst($_SESSION['rol']) ?></p>
     </div>
-    <br>
 
-    <!-- Sección de Bienvenida -->
-    <section class="welcome-section">
-        <h2>Bienvenido a Suplementos Dynamite</h2>
-        <p>Potencia tu rendimiento y salud con los mejores suplementos del mercado.</p>
-        <br>
-        <!--<a> <button class="botonver">VER TODOS LOS PRODUCTOS</button> </a> -->
-        <li class="menu">
-            <a class="menu-link" href="#">Ver Nuestros Productos</a>
-            <ul class="submenu">
-                <li><a class="dropdown-item" href="#">Proteínas</a></li>
-                <li><a class="dropdown-item" href="#">Creatinas</a></li>
-                <li><a class="dropdown-item" href="#">Pre Entrenos</a></li>
-                <li><a class="dropdown-item" href="#">Accesorios</a></li>
-            </ul>
-        </li>
-    </section>
-
-    <br>
-
-    <div class="featured-products">
-        <h2>Productos Destacados</h2>
-        <div class="card-container">
-            <!-- Tarjeta 1 -->
-            <div class="card-container">
+    <div class="dashboard">
+        <div class="card">
+            <h3><i class="fas fa-box"></i> Productos</h3>
+            <p><?= $productos['total'] ?> registrados</p>
+            <a href="productos/listado.php">Gestionar</a>
+        </div>
         
-                <!-- Tarjeta de producto con imagen eliminable -->
-                <div class="card">
-                    <div class="image-container">
-                        <img src="https://dqm4sv5xk0oaj.cloudfront.net/products/46804/large/STANUT004012.jpg?1682601964" alt="Producto 1">
-                        
-                        <!-- Icono de tacho de basura para eliminar la imagen -->
-                        <button class="delete-image-button" title="Eliminar Imagen">🗑️</button>
-                        
-                        <!-- Campo para subir una nueva imagen (oculto por defecto) -->
-                        <div class="upload-image-form">
-                            <label for="newImage1">Nueva Imagen:</label>
-                            <input type="file" id="newImage1" name="newImage">
-                            <button type="button" class="upload-button">Subir Imagen</button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <h5>Creatina StarNutrition</h5>
-                        <p>$ 30,000.00</p>
-                        <button class="btn-outline-custom edit-button">Edit</button>
-                        
-                        <div class="edit-form">
-                            <form action="#">
-                                <label for="productName1">Nombre del Producto:</label>
-                                <input type="text" id="productName1" name="productName" value="Creatina StarNutrition">
-                                
-                                <label for="productPrice1">Precio:</label>
-                                <input type="text" id="productPrice1" name="productPrice" value="$ 30,000.00">
-                                
-                                <button type="submit" class="btn-outline-custom save-button">Guardar</button>
-                                <button type="button" class="btn-outline-custom cancel-button">Cancelar</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Tarjeta 2 -->
-            <div class="card">
-                <img src="https://acdn.mitiendanube.com/stores/001/247/962/products/p_whey_protein-47d119a12f6773f9a417159669691919-1024-1024.jpg" alt="Producto 2">
-                <div class="card-body">
-                    <h5>Star Nutrition Premium Whey Protein 1Kg</h5>
-                    <p>$37,840.00</p>
-                    <br>
-                    <button class="btn-outline-custom">Edit</button>
-                </div>
-            </div>
-            <!-- Repite para las demás tarjetas -->
-            <div class="card">
-                <img src="https://dqm4sv5xk0oaj.cloudfront.net/products/46822/large/open-uri20230428-7-12m4969.?1682643970" alt="Producto 3">
-                <div class="card-body">
-                    <h5>Pump 3d Ripped Pre Entreno</h5>
-                    <p>$27,287.00</p>
-                    <br>
-                    <button class="btn-outline-custom">Edit</button>
-                </div>
-            </div>
-            <div class="card">
-                <img src="https://elbloquear.vtexassets.com/arquivos/ids/160501/97_gr_-_2021-08-02t160238.png?v=637870986089930000" alt="Producto 4">
-                <div class="card-body">
-                    <h5>Suplemento Dietario Enaccion Multivitanimico</h5>
-                    <p>$5,940.00</p>
-                    <br>
-                    <button class="btn-outline-custom">Edit</button>
-                </div>
-            </div>
+        <div class="card">
+            <h3><i class="fas fa-truck"></i> Pedidos Pendientes</h3>
+            <p><?= $pedidos_pendientes['total'] ?> por procesar</p>
+            <a href="pedidos/listado.php">Ver pedidos</a>
+        </div>
+        
+        <div class="card">
+            <h3><i class="fas fa-envelope"></i> Consultas Nuevas</h3>
+            <p><?= $consultas_nuevas['total'] ?> sin responder</p>
+            <a href="consultas/buzon.php">Responder</a>
         </div>
     </div>
-    
 
-    <!-- Pie de Página -->
-    <footer>
-        <p>Dirección: Av. Pres. Arturo Illia 902, Catamarca, Argentina | Email: contacto@suplementosdynamite.com | Tel: (123) 456-7890</p>
-        <br>
-        <div class="social-icons">
-            <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.instagram.com/_suplementos.dynamite" target="_blank"><i class="fab fa-instagram"></i></a>
+    <div class="quick-actions">
+        <h3>Acciones Rápidas</h3>
+        <div>
+            <a href="productos/agregar.php" class="btn-action"><i class="fas fa-plus"></i> Agregar Producto</a>
+            <a href="reportes/stock.php" class="btn-action"><i class="fas fa-exclamation-triangle"></i> Ver Stock Crítico</a>
         </div>
-        <br>
-        <p>&copy; 2024 Suplementos Dynamite. Todos los derechos reservados.</p>
-    </footer>
+    </div>
 
     <script>
-        const dateTimeElement = document.getElementById("date-time");
-        const updateDateTime = () => {
+        function updateDateTime() {
             const now = new Date();
-            dateTimeElement.innerText = now.toLocaleString();
-        };
+            const dateTime = now.toLocaleString();
+            document.getElementById('date-time').textContent = dateTime;
+        }
         setInterval(updateDateTime, 1000);
         updateDateTime();
     </script>
-
 </body>
 </html>

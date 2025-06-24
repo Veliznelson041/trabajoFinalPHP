@@ -30,8 +30,8 @@
     <div>
         <nav class="nav-empleado">
             <ul>
-                <li><a href="buzon-consultas.php">Buzón de Consultas</a></li>
-                <li><a href="listado-productos.php">Listado de Productos</a></li>
+                <li><a href="consultas/buzon.php">Buzón de Consultas</a></li>
+                <li><a href="productos/listado.php">Listado de Productos</a></li>
                 <li><a href="proveedores.php">Proveedores</a></li>
             </ul>
         </nav>
