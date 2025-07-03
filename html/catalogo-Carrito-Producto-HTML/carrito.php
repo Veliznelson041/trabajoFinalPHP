@@ -16,6 +16,9 @@ if (isset($_GET['vaciar'])) {
 }
 ?>
 
+// Versión integrada por Maciel
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
