@@ -520,7 +520,7 @@ if(!$productos) {
             
             <nav class="nav-bar">
                 <ul>
-                    <li><a href="../../empleado.php">Inicio</a></li>
+                    <li><a href="../empleado.php">Inicio</a></li>
                 </ul>
             </nav>
             
