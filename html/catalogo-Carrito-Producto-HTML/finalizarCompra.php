@@ -124,7 +124,7 @@ $_SESSION['carrito'] = [];
             <?php endforeach; ?>
         </table>
 
-        <a href="agregar_al_carrito.php">Volver al catálogo</a>
+        <a href="catalogo.php">Volver al catálogo</a>
     </div>
 </body>
 </html>

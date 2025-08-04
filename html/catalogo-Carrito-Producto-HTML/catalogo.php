@@ -1,5 +1,41 @@
 <?php
+session_start();
 require_once("../../conexion.php");
+
+// Inicializar carrito si no existe
+if (!isset($_SESSION['carrito'])) {
+    $_SESSION['carrito'] = [];
+}
+
+// Agregar producto al carrito
+if (isset($_GET['agregar'])) {
+    $id = (int) $_GET['agregar'];
+    $consulta = $conexion->prepare("SELECT producto_id, nombre, precio FROM productos WHERE producto_id = ? AND stock > 0");
+    $consulta->bind_param("i", $id);
+    $consulta->execute();
+    $resultado = $consulta->get_result();
+    if ($producto = $resultado->fetch_assoc()) {
+        $ya_existe = false;
+        foreach ($_SESSION['carrito'] as &$item) {
+            if ($item['producto_id'] == $id) {
+                $item['cantidad']++;
+                $ya_existe = true;
+                break;
+            }
+        }
+        if (!$ya_existe) {
+            $_SESSION['carrito'][] = [
+                'producto_id' => $producto['producto_id'],
+                'nombre' => $producto['nombre'],
+                'precio' => $producto['precio'],
+                'cantidad' => 1
+            ];
+        }
+    }
+    header("Location: catalogo.php");
+    exit;
+}
+
 $categoria = isset($_GET['categoria']) ? trim($_GET['categoria']) : '';
 $busqueda = isset($_GET['buscar']) ? trim($_GET['buscar']) : '';
 
@@ -47,18 +83,17 @@ if (!empty($categoria)) {
                 <li><a href="../index.php">Inicio</a></li>
                 <li><a href="catalogo.php">Catálogo</a></li>
                 <li><a href="carrito.php">Carrito</a></li>
-                <li><a href="../../html/contactoHtml/contacto.php">Contacto</a></li>                                
+                <li><a href="../../html/contactoHtml/contacto.php">Contacto</a></li>
                 <li><a href="../../html/loginHtml/login.php" class="btn-login"><i class="fas fa-user"></i> Iniciar Sesión</a></li>
-
             </ul>
         </nav>
     </header>
+
     <main>
         <h2>Catálogo de Productos</h2>
         <div class="filters">
             <form method="get" action="catalogo.php" class="filters">
                 <input type="text" name="buscar" placeholder="Buscar en catálogo..." value="<?php echo htmlspecialchars($busqueda); ?>">
-
                 <select name="categoria" onchange="this.form.submit()">
                     <?php
                     $categorias = ['Proteínas', 'Creatinas', 'Pre-entrenos', 'Vitaminas'];
@@ -69,27 +104,21 @@ if (!empty($categoria)) {
                     }
                     ?>
                 </select>
-
                 <button type="submit">Buscar</button>
             </form>
         </div>
-        <div class="product-gallery">
-            <?php while ($producto = $resultado-> fetch_assoc()): ?>
-                <div class="card">
-                    <img src="<?php echo htmlspecialchars($producto['imagen_url'] ?? 'https://via.placeholder.com/200'); ?>" 
-                    alt="Imagen de <?php echo htmlspecialchars($producto['nombre']); ?>" 
-                    style="width: 100%; max-height: 200px; object-fit: contain;">
 
-                    <div class="card-body">
-                        <h5><?php echo htmlspecialchars($producto['nombre']); ?></h5>
-                        <p>$<?php echo number_format($producto['precio'], 2, ',', '.'); ?></p>
-                        <a class="btn-outline-custom" href="producto.php?id=<?php echo $producto['producto_id']; ?>">Ver Producto</a>
-                    </div>
+        <div class="catalogo-grid">
+            <?php while ($row = $resultado->fetch_assoc()): ?>
+                <div class="product-card">
+                    <img src="<?= htmlspecialchars($row['imagen_url']) ?>" alt="<?= htmlspecialchars($row['nombre']) ?>">
+                    <h3><?= htmlspecialchars($row['nombre']) ?></h3>
+                    <p><?= htmlspecialchars($row['descripcion']) ?></p>
+                    <p>Precio: $<?= number_format($row['precio'], 2) ?></p>
+                    <a href="catalogo.php?agregar=<?= $row['producto_id'] ?>"><button class="btn-add">Agregar al carrito</button></a>
                 </div>
             <?php endwhile; ?>
         </div>
     </main>
 </body>
 </html>
-
-<?php $conexion->close(); ?>
