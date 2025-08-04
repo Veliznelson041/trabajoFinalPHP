@@ -16,6 +16,11 @@ while($row = $result->fetch_assoc()) {
     $subcategorias[] = $row;
 }
 
+// Limpiar buffer de salida para evitar contenido previo
+while (ob_get_level()) ob_end_clean();
+
 // Devolver en formato JSON
 header('Content-Type: application/json');
 echo json_encode($subcategorias);
+exit; // Asegurar que no se envía nada después
+?>

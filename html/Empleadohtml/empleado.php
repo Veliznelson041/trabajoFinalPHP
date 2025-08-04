@@ -536,9 +536,9 @@ $consultas_nuevas = $conexion->query($sql_consultas)->fetch_assoc();
         <nav class="nav-bar">
             <ul>
                 <li><a href="empleado.php"><i class="fas fa-home"></i> Inicio</a></li>
-                <li><a href="#"><i class="fas fa-info-circle"></i> Sobre Nosotros</a></li>
+                <!-- <li><a href="#"><i class="fas fa-info-circle"></i> Sobre Nosotros</a></li>
                 <li><a href="#"><i class="fas fa-envelope"></i> Contacto</a></li>
-                <!-- Nuevos botones agregados -->
+                 --><!-- Nuevos botones agregados -->
                 <li><a href="../index.php" class="btn-home-public"><i class="fas fa-globe"></i> Home Público</a></li>
                 <li><a href="perfilempleado.php" class="btn-login"><i class="fas fa-user-cog"></i> Mi Perfil</a></li>
                 <li><a href="../loginHtml/logout.php" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
