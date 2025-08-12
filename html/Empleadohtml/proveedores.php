@@ -360,7 +360,7 @@
         <nav class="nav-bar">
             <ul>
                 <li><a href="empleado.php"><i class="fas fa-home"></i> Inicio</a></li>                         
-                <li><a href="#" class="btn-login"><i class="fas fa-user"></i> Empleado #12</a></li>
+                <li><a href="perfilempleado.php" class="btn-login"><i class="fas fa-user"></i> Empleado</a></li>
             </ul>
         </nav>
     </header>

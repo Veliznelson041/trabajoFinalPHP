@@ -121,7 +121,7 @@ if(!$productos) {
             display: flex;
             align-items: center;
             gap: 10px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgb(255, 255, 255);
             padding: 8px 15px;
             border-radius: 30px;
             transition: all 0.3s ease;
@@ -143,6 +143,15 @@ if(!$productos) {
         }
         
         /* Navigation */
+        .nav-bar a{
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+
         .nav-empleado {
             background: white;
             border-radius: 8px;
@@ -525,7 +534,7 @@ if(!$productos) {
             </nav>
             
             <div class="user-info">
-                <a href="../../perfilempleado.php" class="user-profile">
+                <a href="../perfilempleado.php" class="user-profile">
                     <i class="fas fa-user-circle"></i>
                     <span><?= htmlspecialchars($_SESSION['nombre']) ?></span>
                 </a>
