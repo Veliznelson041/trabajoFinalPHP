@@ -31,7 +31,9 @@ foreach ($_SESSION['carrito'] as $item) {
             margin-bottom: 20px;
             text-align: center;
         }
-        .checkout-container select, .checkout-container button {
+        .checkout-container select,
+        .checkout-container textarea,
+        .checkout-container button {
             width: 100%;
             padding: 12px;
             margin-top: 10px;
@@ -53,6 +55,7 @@ foreach ($_SESSION['carrito'] as $item) {
     <div class="checkout-container">
         <h2>Confirmar compra</h2>
         <p><strong>Total:</strong> $<?= number_format($total, 2) ?></p>
+
         <form action="finalizarCompra.php" method="POST">
             <label for="medio_pago">Seleccioná medio de pago:</label>
             <select name="medio_pago_id" id="medio_pago" required>
@@ -61,6 +64,10 @@ foreach ($_SESSION['carrito'] as $item) {
                 <option value="2">Transferencia</option>
                 <option value="3">Tarjeta</option>
             </select>
+
+            <label for="direccion">Dirección de envío:</label>
+            <textarea name="direccion" id="direccion" rows="4" placeholder="Ej: Calle Falsa 123, Catamarca" required></textarea>
+
             <button type="submit">Finalizar compra</button>
         </form>
     </div>

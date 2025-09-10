@@ -21,14 +21,16 @@ if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
 
-// Medio de pago fijo de prueba (deberías permitir elegir más adelante)
+// Medio de pago
 if (!isset($_POST['medio_pago_id'])) {
     die("Error: medio de pago no seleccionado.");
 }
 $medio_pago_id = (int) $_POST['medio_pago_id'];
-$total = 0;
 
-// Calcular total
+// Dirección de envío
+$direccion = isset($_POST['direccion']) ? trim($_POST['direccion']) : '';
+
+$total = 0;
 foreach ($_SESSION['carrito'] as $item) {
     $total += $item['precio'] * $item['cantidad'];
 }
@@ -69,6 +71,10 @@ $_SESSION['carrito'] = [];
     <div class="mensaje-confirmacion">
         <h2>✅ ¡Gracias por tu compra!</h2>
         <p>Tu pedido fue registrado exitosamente.</p>
+
+        <?php if ($direccion): ?>
+            <p><strong>Dirección de envío:</strong> <?= htmlspecialchars($direccion) ?></p>
+        <?php endif; ?>
 
         <h3>🧾 Resumen de productos:</h3>
         <table>
